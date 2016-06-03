@@ -15,12 +15,16 @@
 			</h2>
 			<div class="entry-content">
 				<?php the_content(); ?>
+				<?php wp_link_pages(); ?>
 			</div>
 			
 					
 		</article><!-- end post -->
 
 		<?php endwhile; ?>
+
+		<?php comments_template(); ?>
+		
 	<?php else: ?>
 
 	<h2>Sorry, no posts found</h2>

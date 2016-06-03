@@ -4,6 +4,9 @@
 //Building custom functionality
 //and more!
 
+//required for auto embeds
+if ( ! isset( $content_width ) ) $content_width = 700;
+
 add_theme_support( 'post-thumbnails' );
 //allows you to style different kinds of posts
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'image', 'audio', 'video', 
@@ -92,6 +95,14 @@ function awesome_widget_areas(){
 		'after_title'	=> '</h3>',
 	) );
 
+}
+
+/**
+ * Enhanced comment form display
+ */
+add_action( 'wp_enqueue_scripts', 'awesome_comment_reply' );
+function awesome_comment_reply(){
+	wp_enqueue_script('comment-reply');
 }
 
 

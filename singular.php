@@ -13,6 +13,7 @@
 			</h2>
 			<div class="entry-content">
 				<?php the_content(); ?>
+				<?php wp_link_pages(); ?>
 			</div>
 			<div class="postmeta"> 
 				<span class="author"> Posted by: <?php the_author(); ?></span>
@@ -24,6 +25,8 @@
 		</article><!-- end post -->
 
 		<?php endwhile; ?>
+
+		<?php comments_template(); //includes comments.php ?>
 
 		<section class="pagination">
 			<?php 
