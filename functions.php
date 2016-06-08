@@ -17,13 +17,13 @@ add_theme_support('custom-background' );
 
 //appearance > customize > header
 add_theme_support('custom-header', array(
-		'width' => 1000,
-		'height' => 200,
+	'width' => 1000,
+	'height' => 200,
 	) );
 
 add_theme_support( 'custom-logo', array(
-		'width' => 250,
-		'height' => 80,
+	'width' => 250,
+	'height' => 80,
 	) );
 
 add_theme_support( 'automatic-feed-links' );
@@ -50,7 +50,7 @@ function awesome_menus(){
 	register_nav_menus( array(
 		'main_nav' 	=> 'Main Menu Area',
 		'utilities' => 'Utility Area',
-	) );
+		) );
 }
 
 /**
@@ -66,7 +66,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'	=> '</h3>',
-	) );
+		) );
 	register_sidebar( array(
 		'name' 			=> 'Page Sidebar',
 		'id'			=> 'page-sidebar',
@@ -75,7 +75,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'	=> '</h3>',
-	) );
+		) );
 	register_sidebar( array(
 		'name' 			=> 'Front Page Area',
 		'id'			=> 'front-page-area',
@@ -84,7 +84,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'	=> '</h3>',
-	) );
+		) );
 	register_sidebar( array(
 		'name' 			=> 'Footer Area',
 		'id'			=> 'footer-area',
@@ -93,7 +93,7 @@ function awesome_widget_areas(){
 		'after_widget' 	=> '</section>',
 		'before_title'  => '<h3 class="widget-title">',
 		'after_title'	=> '</h3>',
-	) );
+		) );
 
 }
 
@@ -103,6 +103,38 @@ function awesome_widget_areas(){
 add_action( 'wp_enqueue_scripts', 'awesome_comment_reply' );
 function awesome_comment_reply(){
 	wp_enqueue_script('comment-reply');
+}
+
+
+
+
+function awesome_products( $number_of_products = 6, $img_size = 'thumbnail' ){
+	$product_query = new WP_Query( array(
+				'post_type' 		=> 'product', 		//any registered post type
+				'posts_per_page' 	=> $number_of_products,  //limit 
+				) ); 
+
+				//custom loop
+	if( $product_query->have_posts() ){ ?>
+		<h2>Latest Products</h2>
+		<ul class="latest-products">
+			<?php while( $product_query->have_posts() ){ 
+				$product_query->the_post();
+				?>
+				<li>
+					<a href="<?php the_permalink(); ?>">
+						<?php the_post_thumbnail( $img_size ); ?>
+						<div class="product-info">
+							<h3><?php the_title(); ?></h3>
+							<p><?php echo get_post_meta($post->ID, 'Price', true); ?></p>
+						</div>
+					</a>
+				</li>
+				<?php } //end while ?>
+			</ul>
+	<?php } //end if have posts
+	//cleanup!
+	wp_reset_postdata();
 }
 
 

@@ -1,4 +1,8 @@
 <aside id="sidebar">
+
+		<section class="widget">	
+			<?php awesome_products(4, 'medium'); ?>
+		</section>
 	<?php 
 	//if there are widgets in the widget area, show them. 
 	//otherwise, show some "fake" widgets
